@@ -1,0 +1,162 @@
+
+adres: https://www.filmweb.pl/film/Przepraszam%2C+%C5%BCe+przeszkadzam-2018-801978/vod
+vod:
+	apple
+	chili.com
+===========
+
+adres: https://www.filmweb.pl/film/Hot+Fuzz+-+Ostre+psy-2007-227672/vod
+vod:
+	netflix
+	apple
+	chili.com
+===========
+
+adres: https://www.filmweb.pl/film/Go%C5%9B%C4%87-2014-707107/vod
+vod:
+	player.pl
+	chili.com
+===========
+
+adres: https://www.filmweb.pl/film/Piraci-2012-555487/vod
+vod:
+	apple
+===========
+
+adres: https://www.filmweb.pl/film/Wp%C5%82yw+ksi%C4%99%C5%BCyca-1987-1277/vod
+vod:
+	apple
+===========
+
+adres: https://www.filmweb.pl/film/Ukryty+wymiar-1997-559/vod
+vod:
+	playnow.pl
+	apple
+===========
+
+adres: https://www.filmweb.pl/film/Gra+o+wszystko-2017-774747/vod
+vod:
+	chili.com
+===========
+
+adres: https://www.filmweb.pl/film/I+tak+ci%C4%99+kocham-2017-781068/vod
+vod:
+	player.pl
+	nowehoryzonty.pl
+	mojeekino.pl
+===========
+
+adres: https://www.filmweb.pl/film/Naznaczony%3A+Ostatni+klucz-2018-751893/vod
+vod:
+	apple
+	chili.com
+===========
+
+adres: https://www.filmweb.pl/film/Party-2017-777179/vod
+vod:
+	mojeekino.pl
+===========
+
+adres: https://www.filmweb.pl/film/Gotowi+na+wszystko.+Exterminator-2017-787951/vod
+vod:
+	netflix
+	canalplus
+	player.pl
+	playnow.pl
+	chili.com
+===========
+
+adres: https://www.filmweb.pl/film/M+jak+morderca-2017-787686/vod
+vod:
+	netflix
+	playnow.pl
+	chili.com
+===========
+
+adres: https://www.filmweb.pl/film/Fernando-2017-718863/vod
+vod:
+	apple
+===========
+
+adres: https://www.filmweb.pl/film/%C5%BBu%C5%BCel-2020-762812/vod
+vod:
+	playnow.pl
+===========
+
+adres: https://www.filmweb.pl/film/Cudak-2021-875425/vod
+vod:
+	vod.tvp.pl
+===========
+
+adres: https://www.filmweb.pl/film/Ciche+miejsce+2-2020-825690/vod
+vod:
+	chili.com
+===========
+
+adres: https://www.filmweb.pl/film/Utalentowany+pan+Ripley-1999-867/vod
+vod:
+	netflix
+	apple
+	chili.com
+===========
+
+adres: https://www.filmweb.pl/film/Ulica+Strachu+-+cz%C4%99%C5%9B%C4%87+1%3A+1994-2021-845775/vod
+vod:
+	netflix
+===========
+
+adres: https://www.filmweb.pl/film/Ojcostwo-2021-832448/vod
+vod:
+	netflix
+===========
+
+adres: https://www.filmweb.pl/film/Zanim+si%C4%99+pojawi%C5%82e%C5%9B-2016-723705/vod
+vod:
+	netflix
+	apple
+===========
+
+adres: https://www.filmweb.pl/film/Joker-2019-810167/vod
+vod:
+	netflix
+	hbo
+	canalplus
+	player.pl
+	playnow.pl
+	apple
+	chili.com
+===========
+
+adres: https://www.filmweb.pl/film/Believe+Me%3A+The+Abduction+of+Lisa+McVey-2018-813938/vod
+vod:
+	netflix
+===========
+
+adres: https://www.filmweb.pl/film/Le+Mans+%2766-2019-705791/vod
+vod:
+	hbo
+	canalplus
+	playnow.pl
+	apple
+	chili.com
+===========
+
+adres: https://www.filmweb.pl/film/Kosmiczny+mecz-1996-582/vod
+vod:
+	netflix
+	apple
+	chili.com
+===========
+
+vod counter: 
+
+hbo: 2
+netflix: 10
+player.pl: 4
+mojeekino.pl: 2
+vod.tvp.pl: 1
+canalplus: 3
+apple: 12
+chili.com: 12
+playnow.pl: 6
+nowehoryzonty.pl: 1
