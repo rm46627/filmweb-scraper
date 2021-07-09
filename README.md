@@ -10,6 +10,8 @@ go run main.go user_name
 
 example output:
 ```
+vod counter:
+
 netflix: 3
 chili.com: 1
 apple: 2

@@ -163,6 +163,7 @@ func writeToFile(movieSlice *[]Movie, vodCounter *map[string]int) {
 	datawriter := bufio.NewWriter(file)
 
 	t, err := template.New("T1").Parse(`
+	vod counter:
 	{{range $Name, $Value := . -}}
 	{{$Name}}: {{$Value}}
 	{{end}}
