@@ -4,7 +4,7 @@ creates txt file with every movie that is available on any vod and lists those v
 
 how to run:
 ```
-go run main.go user_name
+go run main.go `username`
 ```
 
 

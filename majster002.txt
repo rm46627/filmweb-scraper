@@ -1,148 +1,42 @@
 
 	vod counter:
 	
-	apple: 11
-	canalplus: 3
-	chili.com: 11
-	hbo: 2
-	kinopodbaranami.pl: 2
-	mojeekino.pl: 2
-	netflix: 10
-	nowehoryzonty.pl: 1
-	player.pl: 5
-	playnow.pl: 5
+	apple: 4
+	chili.com: 2
+	player.pl: 1
+	playnow.pl: 1
 	vod.tvp.pl: 1
 	
+	adres: https://www.filmweb.pl/film/Przepraszam%2C+%C5%BCe+przeszkadzam-2018-801978/
+	vod: 
+		apple
+		chili.com
 	
-	adres: https://www.filmweb.pl/film/Przepraszam%2C&#43;%C5%BCe&#43;przeszkadzam-2018-801978/vod
-	vod:
-		[apple chili.com]
-
 	----------------------------------------
+	adres: https://www.filmweb.pl/film/Go%C5%9B%C4%87-2014-707107/
+	vod: 
+		player.pl
+		chili.com
 	
-	adres: https://www.filmweb.pl/film/Go%C5%9B%C4%87-2014-707107/vod
-	vod:
-		[player.pl chili.com]
-
 	----------------------------------------
+	adres: https://www.filmweb.pl/film/Piraci-2012-555487/
+	vod: 
+		apple
 	
-	adres: https://www.filmweb.pl/film/Piraci-2012-555487/vod
-	vod:
-		[apple]
-
 	----------------------------------------
+	adres: https://www.filmweb.pl/film/Wp%C5%82yw+ksi%C4%99%C5%BCyca-1987-1277/
+	vod: 
+		apple
 	
-	adres: https://www.filmweb.pl/film/Wp%C5%82yw&#43;ksi%C4%99%C5%BCyca-1987-1277/vod
-	vod:
-		[apple]
-
 	----------------------------------------
+	adres: https://www.filmweb.pl/film/Ukryty+wymiar-1997-559/
+	vod: 
+		playnow.pl
+		apple
 	
-	adres: https://www.filmweb.pl/film/Ukryty&#43;wymiar-1997-559/vod
-	vod:
-		[playnow.pl apple]
-
 	----------------------------------------
+	adres: https://www.filmweb.pl/film/Cudak-2021-875425/
+	vod: 
+		vod.tvp.pl
 	
-	adres: https://www.filmweb.pl/film/Gra&#43;o&#43;wszystko-2017-774747/vod
-	vod:
-		[chili.com]
-
 	----------------------------------------
-	
-	adres: https://www.filmweb.pl/film/I&#43;tak&#43;ci%C4%99&#43;kocham-2017-781068/vod
-	vod:
-		[kinopodbaranami.pl player.pl nowehoryzonty.pl mojeekino.pl]
-
-	----------------------------------------
-	
-	adres: https://www.filmweb.pl/film/Naznaczony%3A&#43;Ostatni&#43;klucz-2018-751893/vod
-	vod:
-		[apple chili.com]
-
-	----------------------------------------
-	
-	adres: https://www.filmweb.pl/film/Party-2017-777179/vod
-	vod:
-		[kinopodbaranami.pl mojeekino.pl]
-
-	----------------------------------------
-	
-	adres: https://www.filmweb.pl/film/Gotowi&#43;na&#43;wszystko.&#43;Exterminator-2017-787951/vod
-	vod:
-		[netflix canalplus player.pl playnow.pl chili.com]
-
-	----------------------------------------
-	
-	adres: https://www.filmweb.pl/film/M&#43;jak&#43;morderca-2017-787686/vod
-	vod:
-		[netflix playnow.pl chili.com]
-
-	----------------------------------------
-	
-	adres: https://www.filmweb.pl/film/Fernando-2017-718863/vod
-	vod:
-		[apple]
-
-	----------------------------------------
-	
-	adres: https://www.filmweb.pl/film/Cudak-2021-875425/vod
-	vod:
-		[vod.tvp.pl]
-
-	----------------------------------------
-	
-	adres: https://www.filmweb.pl/film/Ciche&#43;miejsce&#43;2-2020-825690/vod
-	vod:
-		[chili.com]
-
-	----------------------------------------
-	
-	adres: https://www.filmweb.pl/film/Utalentowany&#43;pan&#43;Ripley-1999-867/vod
-	vod:
-		[netflix apple chili.com]
-
-	----------------------------------------
-	
-	adres: https://www.filmweb.pl/film/Ulica&#43;Strachu&#43;-&#43;cz%C4%99%C5%9B%C4%87&#43;1%3A&#43;1994-2021-845775/vod
-	vod:
-		[netflix]
-
-	----------------------------------------
-	
-	adres: https://www.filmweb.pl/film/Ojcostwo-2021-832448/vod
-	vod:
-		[netflix]
-
-	----------------------------------------
-	
-	adres: https://www.filmweb.pl/film/Zanim&#43;si%C4%99&#43;pojawi%C5%82e%C5%9B-2016-723705/vod
-	vod:
-		[netflix apple]
-
-	----------------------------------------
-	
-	adres: https://www.filmweb.pl/film/Believe&#43;Me%3A&#43;The&#43;Abduction&#43;of&#43;Lisa&#43;McVey-2018-813938/vod
-	vod:
-		[netflix]
-
-	----------------------------------------
-	
-	adres: https://www.filmweb.pl/film/Joker-2019-810167/vod
-	vod:
-		[netflix hbo canalplus player.pl playnow.pl apple chili.com]
-
-	----------------------------------------
-	
-	adres: https://www.filmweb.pl/film/Gdzie&#43;jeste%C5%9B%2C&#43;Amando-2007-234467/vod
-	vod:
-		[netflix apple chili.com]
-
-	----------------------------------------
-	
-	adres: https://www.filmweb.pl/film/Osierocony&#43;Brooklyn-2019-121727/vod
-	vod:
-		[netflix hbo canalplus player.pl playnow.pl apple chili.com]
-
-	----------------------------------------
-	

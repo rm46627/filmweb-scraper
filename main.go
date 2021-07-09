@@ -3,10 +3,10 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"html/template"
 	"net/http"
 	"os"
 	"strings"
+	"text/template"
 
 	"golang.org/x/net/html"
 )
@@ -103,19 +103,20 @@ func gettingThatVod(links []string, movieSlice *[]Movie, vodCounter *map[string]
 		if len(vodNames) < 1 {
 			continue
 		}
-		movie := Movie{Adres: adres, Vod: vodNames}
+		movie := Movie{Adres: adres[:len(adres)-3], Vod: vodNames}
 		(*movieSlice) = append((*movieSlice), movie)
 
 		fmt.Printf("progress: %d/%d\n", progress, done)
 	}
 }
 
-func getLinksFromHTML(adres string) []string {
+func getLinksFromHTML1(adres string) []string {
 	resp, err := http.Get(adres)
 	errHandl(err)
 
 	var links []string
 	z := html.NewTokenizer(resp.Body)
+
 	for {
 		tt := z.Next()
 
@@ -128,6 +129,51 @@ func getLinksFromHTML(adres string) []string {
 				for _, attr := range token.Attr {
 					if attr.Key == "href" {
 						links = append(links, attr.Val)
+					}
+				}
+			}
+
+		}
+	}
+}
+
+func getLinksFromHTML(adres string) []string {
+	resp, err := http.Get(adres)
+	errHandl(err)
+
+	var links []string
+	z := html.NewTokenizer(resp.Body)
+	var f bool = adres[len(adres)-3:] == "vod"
+	for {
+		tt := z.Next()
+
+		switch tt {
+		case html.ErrorToken:
+			return removeDuplicateValues(links)
+		case html.StartTagToken, html.EndTagToken:
+			if !f {
+				token := z.Token()
+				if token.Data == "a" {
+					var value string
+					var title bool = false
+					for _, attr := range token.Attr {
+						if attr.Key == "href" {
+							value = attr.Val
+						} else if attr.Key == "title" {
+							title = true
+						}
+					}
+					if !title {
+						links = append(links, value)
+					}
+				}
+			} else {
+				token := z.Token()
+				if token.Data == "a" {
+					for _, attr := range token.Attr {
+						if attr.Key == "href" {
+							links = append(links, attr.Val)
+						}
 					}
 				}
 			}
@@ -156,31 +202,29 @@ func errHandl(err error) {
 }
 
 func writeToFile(movieSlice *[]Movie, vodCounter *map[string]int) {
+
+	if len(*movieSlice) > 0 {
+		fmt.Println("writting done")
+	} else {
+		fmt.Println("didnt catch any links, chceck provided username")
+		return
+	}
+
 	filename := os.Args[1] + ".txt"
 	file, err := os.OpenFile(filename, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	errHandl(err)
 
 	datawriter := bufio.NewWriter(file)
 
-	t, err := template.New("T1").Parse(`
-	vod counter:
-	{{range $Name, $Value := . -}}
-	{{$Name}}: {{$Value}}
-	{{end}}
-	`)
+	t, err := template.New("T1").Parse(template1)
 	errHandl(err)
 
 	err = t.Execute(datawriter, *vodCounter)
 	errHandl(err)
 
 	for _, arg := range *movieSlice {
-		t, err := template.New("T2").Parse(`
-	adres: {{.Adres}}
-	vod:
-		{{.Vod}}
-
-	----------------------------------------
-	`)
+		removeDuplicateValues(arg.Vod)
+		t, err := template.New("T2").Parse(template2)
 		errHandl(err)
 
 		err = t.Execute(datawriter, arg)
@@ -188,8 +232,6 @@ func writeToFile(movieSlice *[]Movie, vodCounter *map[string]int) {
 	}
 	datawriter.Flush()
 	file.Close()
-
-	fmt.Println("writting done")
 }
 
 type Movie struct {
@@ -199,9 +241,28 @@ type Movie struct {
 
 const (
 	baseURL = "https://www.filmweb.pl"
+
+	template1 = `
+	vod counter:
+	
+	{{range $Name, $Value := . -}}
+	{{$Name}}: {{$Value}}
+	{{end}}`
+
+	template2 = `
+	adres: {{.Adres}}
+	vod: 
+	{{range $Name := .Vod}}	{{$Name}}
+	{{end}}
+	----------------------------------------`
 )
 
 func main() {
+	// check for args
+	if len(os.Args) < 2 {
+		fmt.Println("Error reading username.")
+		return
+	}
 
 	adres := "https://www.filmweb.pl/user/" + os.Args[1] + "/wantToSee?page=1"
 	var movieSlice []Movie
