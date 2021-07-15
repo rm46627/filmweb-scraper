@@ -57,8 +57,11 @@ func removeDuplicateValues(strSlice []string) []string {
 func gettingThatVod(links []string, movieSlice *[]Movie, vodCounter *map[string]int) {
 	done := len(links)
 	for progress, linkToVodPage := range links {
-		adres := baseURL + linkToVodPage
-		linksOnVodPage := getLinksFromHTML(adres)
+		address := baseURL + linkToVodPage
+		linksOnVodPage, err := getLinksFromHTML(address)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "Cannot collect links from HTML: %v\n", err)
+		}
 		filteredLinks := filterStrings_Contains(linksOnVodPage,
 			"itunes.apple.com",
 			"netflix.com",
@@ -103,70 +106,50 @@ func gettingThatVod(links []string, movieSlice *[]Movie, vodCounter *map[string]
 		if len(vodNames) < 1 {
 			continue
 		}
-		movie := Movie{Adres: adres[:len(adres)-3], Vod: vodNames}
+		movie := Movie{Address: address[:len(address)-3], Vod: vodNames}
 		(*movieSlice) = append((*movieSlice), movie)
 
 		fmt.Printf("progress: %d/%d\n", progress, done)
 	}
 }
 
-func getLinksFromHTML1(adres string) []string {
-	resp, err := http.Get(adres)
-	errHandl(err)
-
-	var links []string
-	z := html.NewTokenizer(resp.Body)
-
-	for {
-		tt := z.Next()
-
-		switch tt {
-		case html.ErrorToken:
-			return removeDuplicateValues(links)
-		case html.StartTagToken, html.EndTagToken:
-			token := z.Token()
-			if token.Data == "a" {
-				for _, attr := range token.Attr {
-					if attr.Key == "href" {
-						links = append(links, attr.Val)
-					}
-				}
-			}
-
-		}
+// find links in the given address
+func getLinksFromHTML(address string) ([]string, error) {
+	resp, err := http.Get(address)
+	if err != nil {
+		return nil, fmt.Errorf("there were too many redirects or if there was an HTTP protocol error")
 	}
-}
-
-func getLinksFromHTML(adres string) []string {
-	resp, err := http.Get(adres)
-	errHandl(err)
-
 	var links []string
 	z := html.NewTokenizer(resp.Body)
-	var f bool = adres[len(adres)-3:] == "vod"
-	for {
-		tt := z.Next()
+	var addressSuffix bool = address[len(address)-3:] == "vod"
 
-		switch tt {
+	for {
+		// for tokenization error
+		tokenType := z.Next()
+
+		switch tokenType {
 		case html.ErrorToken:
-			return removeDuplicateValues(links)
+			return removeDuplicateValues(links), nil
 		case html.StartTagToken, html.EndTagToken:
-			if !f {
+			// if address ends with "vod"
+			// need to collect linsk that dont have the "title" attribute
+			if !addressSuffix {
 				token := z.Token()
 				if token.Data == "a" {
 					var value string
-					var title bool = false
+					var titleAttr bool = false
 					for _, attr := range token.Attr {
 						if attr.Key == "href" {
 							value = attr.Val
 						} else if attr.Key == "title" {
-							title = true
+							titleAttr = true
 						}
 					}
-					if !title {
+					if !titleAttr {
 						links = append(links, value)
 					}
 				}
+				// collects all the links
 			} else {
 				token := z.Token()
 				if token.Data == "a" {
@@ -195,48 +178,56 @@ func linksToVodName(vodCounter *map[string]int, filteredLinks []string, names ..
 	return out
 }
 
-func errHandl(err error) {
-	if err != nil {
-		panic(err)
-	}
-}
-
-func writeToFile(movieSlice *[]Movie, vodCounter *map[string]int) {
-
-	if len(*movieSlice) > 0 {
-		fmt.Println("writting done")
-	} else {
-		fmt.Println("didnt catch any links, chceck provided username")
-		return
-	}
+func writeToFile(movieSlice *[]Movie, vodCounter *map[string]int) error {
 
 	filename := os.Args[1] + ".txt"
+	// check for old file
+	if _, exist := os.Stat(filename); exist == nil {
+		os.Remove(filename)
+	}
+
+	if len(*movieSlice) == 0 {
+		return fmt.Errorf("didnt catch any links, chceck provided username")
+	}
+
 	file, err := os.OpenFile(filename, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
-	errHandl(err)
+	if err != nil {
+		return fmt.Errorf("openning the %s file: %v", filename, err)
+	}
 
 	datawriter := bufio.NewWriter(file)
 
 	t, err := template.New("T1").Parse(template1)
-	errHandl(err)
+	if err != nil {
+		return fmt.Errorf("parsing T1 template body: %v", err)
+	}
 
 	err = t.Execute(datawriter, *vodCounter)
-	errHandl(err)
+	if err != nil {
+		return fmt.Errorf("applying T1 template to data obj: %v", err)
+	}
 
 	for _, arg := range *movieSlice {
 		removeDuplicateValues(arg.Vod)
 		t, err := template.New("T2").Parse(template2)
-		errHandl(err)
+		if err != nil {
+			return fmt.Errorf("parsing T2 template body for %s: %v", arg.Address, err)
+		}
 
 		err = t.Execute(datawriter, arg)
-		errHandl(err)
+		if err != nil {
+			return fmt.Errorf("applying T2 template to data obj for %s: %v", arg.Address, err)
+		}
 	}
+
 	datawriter.Flush()
 	file.Close()
+	return nil
 }
 
 type Movie struct {
-	Adres string
-	Vod   []string
+	Address string
+	Vod     []string
 }
 
 const (
@@ -250,7 +241,7 @@ const (
 	{{end}}`
 
 	template2 = `
-	adres: {{.Adres}}
+	address: {{.Address}}
 	vod: 
 	{{range $Name := .Vod}}	{{$Name}}
 	{{end}}
@@ -260,16 +251,20 @@ const (
 func main() {
 	// check for args
 	if len(os.Args) < 2 {
-		fmt.Println("Error reading username.")
-		return
+		fmt.Fprintf(os.Stderr, "error reading username\n")
+		os.Exit(1)
 	}
 
-	adres := "https://www.filmweb.pl/user/" + os.Args[1] + "/wantToSee?page=1"
+	address := "https://www.filmweb.pl/user/" + os.Args[1] + "/wantToSee?page=1"
 	var movieSlice []Movie
 	vodCounter := make(map[string]int)
 
 	// getting links from want to see page of specyfic user
-	links := getLinksFromHTML(adres)
+	links, err := getLinksFromHTML(address)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "%v\n", err)
+		os.Exit(1)
+	}
 
 	// filters links that contain "/film" and dont contain "/ranking/"
 	filteredLinks := filterStrings_Contains(links, "/film/")
@@ -281,4 +276,6 @@ func main() {
 
 	// writing everything to file
 	writeToFile(&movieSlice, &vodCounter)
+
+	fmt.Println("Success!")
 }

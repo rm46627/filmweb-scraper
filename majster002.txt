@@ -1,42 +1,101 @@
 
 	vod counter:
 	
-	apple: 4
-	chili.com: 2
-	player.pl: 1
-	playnow.pl: 1
-	vod.tvp.pl: 1
+	apple: 3
+	canalplus: 8
+	chili.com: 3
+	hbo: 3
+	kinopodbaranami.pl: 4
+	mojeekino.pl: 4
+	nowehoryzonty.pl: 5
+	player.pl: 9
+	playnow.pl: 3
+	vod.mdag.pl: 1
 	
-	adres: https://www.filmweb.pl/film/Przepraszam%2C+%C5%BCe+przeszkadzam-2018-801978/
+	address: https://www.filmweb.pl/film/Krzyk-1996-91/
 	vod: 
-		apple
-		chili.com
-	
-	----------------------------------------
-	adres: https://www.filmweb.pl/film/Go%C5%9B%C4%87-2014-707107/
-	vod: 
+		hbo
+		canalplus
 		player.pl
-		chili.com
-	
-	----------------------------------------
-	adres: https://www.filmweb.pl/film/Piraci-2012-555487/
-	vod: 
-		apple
-	
-	----------------------------------------
-	adres: https://www.filmweb.pl/film/Wp%C5%82yw+ksi%C4%99%C5%BCyca-1987-1277/
-	vod: 
-		apple
-	
-	----------------------------------------
-	adres: https://www.filmweb.pl/film/Ukryty+wymiar-1997-559/
-	vod: 
 		playnow.pl
 		apple
+		chili.com
 	
 	----------------------------------------
-	adres: https://www.filmweb.pl/film/Cudak-2021-875425/
+	address: https://www.filmweb.pl/film/Epicentrum-2020-847317/
 	vod: 
-		vod.tvp.pl
+		vod.mdag.pl
+	
+	----------------------------------------
+	address: https://www.filmweb.pl/film/My+dwie-2019-850915/
+	vod: 
+		kinopodbaranami.pl
+		canalplus
+		player.pl
+		nowehoryzonty.pl
+		mojeekino.pl
+		chili.com
+	
+	----------------------------------------
+	address: https://www.filmweb.pl/film/A+potem+ta%C5%84czyli%C5%9Bmy-2019-838866/
+	vod: 
+		kinopodbaranami.pl
+		canalplus
+		player.pl
+		player.pl
+		nowehoryzonty.pl
+		mojeekino.pl
+		chili.com
+	
+	----------------------------------------
+	address: https://www.filmweb.pl/film/S%C5%82udzy-2020-849125/
+	vod: 
+		kinopodbaranami.pl
+		canalplus
+		player.pl
+		nowehoryzonty.pl
+		mojeekino.pl
+	
+	----------------------------------------
+	address: https://www.filmweb.pl/film/Atlantyda-2019-837274/
+	vod: 
+		hbo
+		canalplus
+		player.pl
+		playnow.pl
+		nowehoryzonty.pl
+	
+	----------------------------------------
+	address: https://www.filmweb.pl/film/Zabij+to+i+wyjed%C5%BA+z+tego+miasta-2019-658043/
+	vod: 
+		kinopodbaranami.pl
+		canalplus
+		player.pl
+		nowehoryzonty.pl
+		mojeekino.pl
+	
+	----------------------------------------
+	address: https://www.filmweb.pl/film/Nasze+dzieci-2019-823675/
+	vod: 
+		hbo
+		canalplus
+		player.pl
+		playnow.pl
+	
+	----------------------------------------
+	address: https://www.filmweb.pl/film/Ed+Wood-1994-5347/
+	vod: 
+		apple
+	
+	----------------------------------------
+	address: https://www.filmweb.pl/film/Palm+Springs-2020-839586/
+	vod: 
+		canalplus
+		player.pl
+	
+	----------------------------------------
+	address: https://www.filmweb.pl/film/Baghead-2008-399358/
+	vod: 
+		apple
 	
 	----------------------------------------
