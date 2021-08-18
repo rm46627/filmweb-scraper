@@ -1,5 +1,5 @@
-module main.go
+module github.com/rm46627/fws
 
 go 1.16
 
-require golang.org/x/net v0.0.0-20210614182718-04defd469f4e
+require golang.org/x/net v0.0.0-20210813160813-60bc85c4be6d

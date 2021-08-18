@@ -1,5 +1,5 @@
 # filmweb-scraper
-Program scrap data from https://www.filmweb.pl/. Visits movies pages from want to see page of given user,  
+Program scrap data from https://www.filmweb.pl/. Visits movies pages from "want to see" page of given user,  
 creates txt file with every movie that is available on any vod and lists those vod sites.
 
 how to run:

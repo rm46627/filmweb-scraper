@@ -1,4 +1,4 @@
-package main
+package scraper
 
 import (
 	"bufio"
@@ -11,7 +11,8 @@ import (
 	"golang.org/x/net/html"
 )
 
-func filterStrings_Contains(strSlice []string, canContain ...string) []string {
+// FilterStringsContains return slice of strings which contain given filters.
+func FilterStringsContains(strSlice []string, canContain ...string) []string {
 	var out []string
 	for _, str := range strSlice {
 		for _, cmp := range canContain {
@@ -23,7 +24,8 @@ func filterStrings_Contains(strSlice []string, canContain ...string) []string {
 	return out
 }
 
-func filterStrings_DoesNotContain(strSlice []string, cannotContain string) []string {
+// FilterStringsDoesNotContain return slice of strings which does not contain given filters.
+func FilterStringsDoesNotContain(strSlice []string, cannotContain string) []string {
 	var out []string
 	for _, str := range strSlice {
 		if strings.Contains(str, cannotContain) {
@@ -34,7 +36,8 @@ func filterStrings_DoesNotContain(strSlice []string, cannotContain string) []str
 	return out
 }
 
-func addSuffixToSliceOfString(slice *[]string, suffix string) {
+// AddSuffixToSliceOfString adds suffix to every string from given slice.
+func AddSuffixToSliceOfString(slice *[]string, suffix string) {
 	for i, arg := range *slice {
 		if !strings.HasSuffix(arg, suffix) {
 			(*slice)[i] = (*slice)[i] + suffix
@@ -54,15 +57,16 @@ func removeDuplicateValues(strSlice []string) []string {
 	return out
 }
 
-func gettingThatVod(links []string, movieSlice *[]Movie, vodCounter *map[string]int) {
+// GettingThatVod search for vod addresses in given slice of links, write data to []Movie and counts occurrence of each site.
+func GettingThatVod(links []string, movieSlice *[]Movie, vodCounter *map[string]int) {
 	done := len(links)
 	for progress, linkToVodPage := range links {
 		address := baseURL + linkToVodPage
-		linksOnVodPage, err := getLinksFromHTML(address)
+		linksOnVodPage, err := GetLinksFromHTML(address)
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "Cannot collect links from HTML: %v\n", err)
 		}
-		filteredLinks := filterStrings_Contains(linksOnVodPage,
+		filteredLinks := FilterStringsContains(linksOnVodPage,
 			"itunes.apple.com",
 			"netflix.com",
 			"hbogo.pl",
@@ -73,7 +77,6 @@ func gettingThatVod(links []string, movieSlice *[]Movie, vodCounter *map[string]
 			"chili.com",
 			"vod.tvp.pl",
 			"nowehoryzonty.pl",
-			"vod.mdag.pl",
 			"piecsmakow.pl",
 			"mojeekino.pl",
 			"ninateka.pl",
@@ -93,7 +96,6 @@ func gettingThatVod(links []string, movieSlice *[]Movie, vodCounter *map[string]
 			"chili.com",
 			"vod.tvp.pl",
 			"nowehoryzonty.pl",
-			"vod.mdag.pl",
 			"piecsmakow.pl",
 			"mojeekino.pl",
 			"ninateka.pl",
@@ -113,15 +115,17 @@ func gettingThatVod(links []string, movieSlice *[]Movie, vodCounter *map[string]
 	}
 }
 
-// find links in the given address
-func getLinksFromHTML(address string) ([]string, error) {
+// GetLinksFromHTML find links in the given address.
+// Returns slice of string and error.
+func GetLinksFromHTML(address string) ([]string, error) {
 	resp, err := http.Get(address)
 	if err != nil {
 		return nil, fmt.Errorf("there were too many redirects or if there was an HTTP protocol error")
 	}
 	var links []string
 	z := html.NewTokenizer(resp.Body)
-	var addressSuffix bool = address[len(address)-3:] == "vod"
+	var addressSuffix bool
+	addressSuffix = address[len(address)-3:] == "vod"
 
 	for {
 		// for tokenization error
@@ -132,12 +136,12 @@ func getLinksFromHTML(address string) ([]string, error) {
 			return removeDuplicateValues(links), nil
 		case html.StartTagToken, html.EndTagToken:
 			// if address ends with "vod"
-			// need to collect linsk that dont have the "title" attribute
+			// need to collect links that dont have the "title" attribute
 			if !addressSuffix {
 				token := z.Token()
 				if token.Data == "a" {
 					var value string
-					var titleAttr bool = false
+					var titleAttr bool
 					for _, attr := range token.Attr {
 						if attr.Key == "href" {
 							value = attr.Val
@@ -178,7 +182,8 @@ func linksToVodName(vodCounter *map[string]int, filteredLinks []string, names ..
 	return out
 }
 
-func writeToFile(movieSlice *[]Movie, vodCounter *map[string]int) error {
+// WriteToFile parses data from slice of Movie struct to txt file
+func WriteToFile(movieSlice *[]Movie, vodCounter *map[string]int) error {
 
 	filename := os.Args[1] + ".txt"
 	// check for old file
@@ -187,12 +192,12 @@ func writeToFile(movieSlice *[]Movie, vodCounter *map[string]int) error {
 	}
 
 	if len(*movieSlice) == 0 {
-		return fmt.Errorf("didnt catch any links, chceck provided username")
+		return fmt.Errorf("didnt catch any links, check provided username")
 	}
 
 	file, err := os.OpenFile(filename, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
-		return fmt.Errorf("openning the %s file: %v", filename, err)
+		return fmt.Errorf("opening the %s file: %v", filename, err)
 	}
 
 	datawriter := bufio.NewWriter(file)
@@ -225,9 +230,17 @@ func writeToFile(movieSlice *[]Movie, vodCounter *map[string]int) error {
 	return nil
 }
 
+// Movie struct contains address to the filmweb page of the movie and
+// slice of the names of the websites where movie can be viewed.
 type Movie struct {
 	Address string
 	Vod     []string
+}
+
+// DataSlice func return slice of Movie struct
+func DataSlice() []Movie {
+	var slice []Movie
+	return slice
 }
 
 const (
@@ -247,35 +260,3 @@ const (
 	{{end}}
 	----------------------------------------`
 )
-
-func main() {
-	// check for args
-	if len(os.Args) < 2 {
-		fmt.Fprintf(os.Stderr, "error reading username\n")
-		os.Exit(1)
-	}
-
-	address := "https://www.filmweb.pl/user/" + os.Args[1] + "/wantToSee?page=1"
-	var movieSlice []Movie
-	vodCounter := make(map[string]int)
-
-	// getting links from want to see page of specyfic user
-	links, err := getLinksFromHTML(address)
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "%v\n", err)
-		os.Exit(1)
-	}
-
-	// filters links that contain "/film" and dont contain "/ranking/"
-	filteredLinks := filterStrings_Contains(links, "/film/")
-	filteredLinks = filterStrings_DoesNotContain(filteredLinks, "/ranking/")
-	addSuffixToSliceOfString(&filteredLinks, "/vod")
-
-	// writing data to slice of Movie struct and vodCounter
-	gettingThatVod(filteredLinks, &movieSlice, &vodCounter)
-
-	// writing everything to file
-	writeToFile(&movieSlice, &vodCounter)
-
-	fmt.Println("Success!")
-}
