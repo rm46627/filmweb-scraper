@@ -14,7 +14,7 @@ go install /path/to/want
 want tosee `username`
 ```
 
-### example output:
+#### example output:
 ```
 vod counter:
 
