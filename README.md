@@ -4,7 +4,7 @@ creates txt file with every movie that is available on any vod and lists those v
 
 
 
-### how to use:
+#### how to use:
 ```
 go run main.go tosee `username`
 ```
@@ -14,7 +14,7 @@ go install /path/to/want
 want tosee `username`
 ```
 
-example output:
+### example output:
 ```
 vod counter:
 
