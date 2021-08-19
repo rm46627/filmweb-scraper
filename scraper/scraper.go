@@ -237,8 +237,8 @@ type Movie struct {
 	Vod     []string
 }
 
-// DataSlice func return slice of Movie struct
-func DataSlice() []Movie {
+// MovieSlice func return slice of Movie struct
+func MovieSlice() []Movie {
 	var slice []Movie
 	return slice
 }
