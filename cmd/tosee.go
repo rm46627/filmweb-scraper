@@ -38,7 +38,8 @@ var tosee = &cobra.Command{
 		scraper.GettingThatVod(filteredLinks, &movieSlice, &vodCounter)
 
 		// writing everything to file
-		scraper.WriteToFile(&movieSlice, &vodCounter)
+		filename := os.Args[0] + ".txt"
+		scraper.WriteToFile(&movieSlice, &vodCounter, filename)
 
 		fmt.Println("Success!")
 
