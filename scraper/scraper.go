@@ -183,9 +183,8 @@ func linksToVodName(vodCounter *map[string]int, filteredLinks []string, names ..
 }
 
 // WriteToFile parses data from slice of Movie struct to txt file
-func WriteToFile(movieSlice *[]Movie, vodCounter *map[string]int) error {
+func WriteToFile(movieSlice *[]Movie, vodCounter *map[string]int, filename string) error {
 
-	filename := os.Args[1] + ".txt"
 	// check for old file
 	if _, exist := os.Stat(filename); exist == nil {
 		os.Remove(filename)
