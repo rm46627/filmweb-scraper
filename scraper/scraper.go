@@ -245,17 +245,15 @@ func MovieSlice() []Movie {
 const (
 	baseURL = "https://www.filmweb.pl"
 
-	template1 = `
-vod counter:
-	
+	template1 = `vod counter:
+
 {{range $Name, $Value := . -}}
 {{$Name}}: {{$Value}}
 {{end}}`
 
-	template2 = `
-address: {{.Address}}
+	template2 = `address: {{.Address}}
 vod: 
-{{range $Name := .Vod}}	{{$Name}}
-{{end}}
+	{{range $Name := .Vod}}	{{$Name}}
+	{{end}}
 ----------------------------------------`
 )
