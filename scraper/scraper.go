@@ -246,16 +246,16 @@ const (
 	baseURL = "https://www.filmweb.pl"
 
 	template1 = `
-	vod counter:
+vod counter:
 	
-	{{range $Name, $Value := . -}}
-	{{$Name}}: {{$Value}}
-	{{end}}`
+{{range $Name, $Value := . -}}
+{{$Name}}: {{$Value}}
+{{end}}`
 
 	template2 = `
-	address: {{.Address}}
-	vod: 
-	{{range $Name := .Vod}}	{{$Name}}
-	{{end}}
-	----------------------------------------`
+address: {{.Address}}
+vod: 
+{{range $Name := .Vod}}	{{$Name}}
+{{end}}
+----------------------------------------`
 )
