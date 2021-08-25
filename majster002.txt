@@ -1,25 +1,18 @@
 
 	vod counter:
 	
-	apple: 4
+	apple: 3
 	canalplus: 1
-	chili.com: 4
+	chili.com: 3
 	kinopodbaranami.pl: 2
 	mojeekino.pl: 2
-	netflix: 2
 	nowehoryzonty.pl: 2
 	player.pl: 1
+	playnow.pl: 1
 	vod.tvp.pl: 1
 	
 	address: https://www.filmweb.pl/film/Gdyby+ulica+Beale+umia%C5%82a+m%C3%B3wi%C4%87-2018-805105/
 	vod: 
-		apple
-		chili.com
-	
-	----------------------------------------
-	address: https://www.filmweb.pl/film/8+Mila-2002-32358/
-	vod: 
-		netflix
 		apple
 		chili.com
 	
@@ -36,6 +29,7 @@
 	----------------------------------------
 	address: https://www.filmweb.pl/film/Tootsie-1982-1043/
 	vod: 
+		playnow.pl
 		apple
 	
 	----------------------------------------
@@ -55,11 +49,6 @@
 	address: https://www.filmweb.pl/film/Przyn%C4%99ta-2019-834132/
 	vod: 
 		nowehoryzonty.pl
-	
-	----------------------------------------
-	address: https://www.filmweb.pl/film/Pami%C4%85tka-2019-818322/
-	vod: 
-		netflix
 	
 	----------------------------------------
 	address: https://www.filmweb.pl/film/Kwiat+szcz%C4%99%C5%9Bcia-2019-822592/
