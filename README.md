@@ -4,12 +4,12 @@ creates txt file with every movie that is available on any vod and lists those v
 
 #### how to use:
 ```
-go run main.go tosee `username`
+$ go run main.go tosee `username`
 ```
 or
 ```
-go install /path/to/want
-want tosee `username`
+$ go install /path/to/want
+$ want tosee `username`
 ```
 
 #### example output:
