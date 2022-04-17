@@ -8,7 +8,7 @@ $ go run main.go tosee `username`
 ```
 or
 ```
-$ go install /path/to/want
+$ go install /path/to/the/downloaded/repository
 $ want tosee `username`
 ```
 
